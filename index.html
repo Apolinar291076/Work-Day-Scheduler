@@ -30,16 +30,17 @@
     </header>
     <div class="container">
 
-       <!--Entered code starts here-->
-        <div class="row time-block">
-            <div class="col-sm-1 hour">
+       <!--Entered code starts here
+        <div class="row">
+            <p class="col-sm-1 time-block hour">9AM</p>-->
+            <!--<div class="col-sm-1 hour">
               9AM
             </div>
-            <textarea class="form-control col-sm-10 description future" rows="3"></textarea>
-            <button class="saveBtn col-sm-1">
+            <textarea class="col-sm-10 description" rows="3"></textarea>
+            <button class="col-sm-1 saveBtn">
               <i class="fas fa-save"></i>
             </button>
-        </div>
+        </div>-->
       <!--Entered code ends here-->
     </div>
     
@@ -48,10 +49,54 @@
 
     <script>
       //Start of user program
+      $(document).ready(function() {
       var nowDateString = moment().format("dddd, MMM Mo YYYY")
-      console.log(nowDateString);
       $("#currentDay").text(nowDateString);
-      //End of user program
+
+      
+
+      for (var i = 6; i <= 20; i++){
+        var rowId = "row" + i;
+        var btnId = "btn" + i;
+        var newRow = $("<div>");
+        newRow.addClass("row");
+        newRow.attr("id", rowId);
+        $(".container").append(newRow);
+
+        var newP = $("<p>");
+        newP.addClass("col-sm-1 time-block hour");
+        var xHour;
+        var tDenote;
+        if (i < 12){
+            xHour = i;
+            tDenote = "AM";
+        }
+        else if (i == 12) {
+            xHour = i;
+            tDenote = "NN";
+        }
+        else if (i >= 13){
+            xHour = i - 12;
+            tDenote = "PM"
+        }
+        newP.text(xHour + " " + tDenote);
+        $("#"+rowId).append(newP);
+
+        var newTxt = $("<textarea>");
+        newTxt.addClass("col-sm-10 description");
+        $("#"+rowId).append(newTxt);
+
+        var svBtn = $("<button>");
+        svBtn.addClass("col-sm-1 saveBtn").attr("id", btnId);
+        $("#"+rowId).append(svBtn);
+      
+        var iSv = $("<i>");
+        iSv.addClass("fas fa-save");
+
+        $("#"+btnId).append(iSv);
+      }
+
+      });
     </script>
 
   </body>
