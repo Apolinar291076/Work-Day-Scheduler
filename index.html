@@ -50,10 +50,10 @@
     <script>
       //Start of user program
       $(document).ready(function() {
-      var nowDateString = moment().format("dddd, MMM Mo YYYY")
+      var nowDateString = moment().format("dddd, Mo MMM YYYY")
       $("#currentDay").text(nowDateString);
 
-      
+      var hourOfDay = moment().hours();
 
       for (var i = 6; i <= 20; i++){
         var rowId = "row" + i;
@@ -84,6 +84,17 @@
 
         var newTxt = $("<textarea>");
         newTxt.addClass("col-sm-10 description");
+
+        if (i < hourOfDay){
+          newTxt.addClass("past");
+        }
+        else if (i == hourOfDay){
+          newTxt.addClass("present");
+        }
+        else if (i > hourOfDay){
+          newTxt.addClass("future");
+        }
+
         $("#"+rowId).append(newTxt);
 
         var svBtn = $("<button>");
