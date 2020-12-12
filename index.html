@@ -83,7 +83,8 @@
         $("#"+rowId).append(newP);
 
         var newTxt = $("<textarea>");
-        newTxt.addClass("col-sm-10 description");
+        newTxt.addClass("col-sm-10 description").attr("date-string", ""); //modified
+        newTxt.attr("date-string", newTxt.value);
 
         if (i < hourOfDay){
           newTxt.addClass("past");
@@ -99,6 +100,7 @@
 
         var svBtn = $("<button>");
         svBtn.addClass("col-sm-1 saveBtn").attr("id", btnId);
+        svBtn.attr("date-number", i);
         $("#"+rowId).append(svBtn);
       
         var iSv = $("<i>");
@@ -106,6 +108,17 @@
 
         $("#"+btnId).append(iSv);
       }
+      $(".description").change(function(){
+        //alert("Handler for change called");
+        $(this).attr("date-string", this.value.trim());
+      })
+
+      $(".saveBtn").on("click", function(){
+        var dateStr = $(this).siblings(".description").attr("date-string");
+        var dateNumKey = $(this).attr("date-number");
+        console.log(dateNumKey);
+        console.log(dateStr);
+      })
 
       });
     </script>
