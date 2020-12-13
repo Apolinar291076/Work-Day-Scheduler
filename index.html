@@ -59,12 +59,12 @@
         var rowId = "row" + i;
         var btnId = "btn" + i;
         var newRow = $("<div>");
-        newRow.addClass("row");
+        newRow.addClass("row time-block"); 
         newRow.attr("id", rowId);
         $(".container").append(newRow);
 
         var newP = $("<p>");
-        newP.addClass("col-sm-1 time-block hour");
+        newP.addClass("col-sm-1 hour");
         var xHour;
         var tDenote;
         if (i < 12){
@@ -83,11 +83,16 @@
         $("#"+rowId).append(newP);
 
         var newTxt = $("<textarea>");
-        newTxt.addClass("col-sm-10 description").attr("date-string", ""); //modified
-        newTxt.attr("date-string", newTxt.value);
+        newTxt.addClass("col-sm-10 description").attr("date-string", "");
+        var txtStored = localStorage.getItem(i.toString());
+
+        if (txtStored != null) {
+          newTxt.text(txtStored);
+        }
 
         if (i < hourOfDay){
           newTxt.addClass("past");
+          newTxt.attr("disabled", "true");
         }
         else if (i == hourOfDay){
           newTxt.addClass("present");
@@ -109,15 +114,13 @@
         $("#"+btnId).append(iSv);
       }
       $(".description").change(function(){
-        //alert("Handler for change called");
         $(this).attr("date-string", this.value.trim());
       })
 
       $(".saveBtn").on("click", function(){
         var dateStr = $(this).siblings(".description").attr("date-string");
         var dateNumKey = $(this).attr("date-number");
-        console.log(dateNumKey);
-        console.log(dateStr);
+        localStorage.setItem(dateNumKey, dateStr);
       })
 
       });
