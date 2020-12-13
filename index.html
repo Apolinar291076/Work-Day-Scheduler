@@ -50,12 +50,16 @@
     <script>
       //Start of user program
       $(document).ready(function() {
-      var nowDateString = moment().format("dddd, Mo MMM YYYY")
+      var nowDateString = moment().format("dddd, Do MMM YYYY")
       $("#currentDay").text(nowDateString);
+      console.log(nowDateString);
 
-      var hourOfDay = moment().hours();
+      var hourOfDay = moment().hours(); //used to identify past, present, and future timeblocks
+      var dayOfYear = moment().dayOfYear();
+      console.log(dayOfYear);
 
-      for (var i = 6; i <= 20; i++){
+
+      for (var i = 8; i <= 18; i++){
         var rowId = "row" + i;
         var btnId = "btn" + i;
         var newRow = $("<div>");
@@ -84,7 +88,7 @@
 
         var newTxt = $("<textarea>");
         newTxt.addClass("col-sm-10 description").attr("date-string", "");
-        var txtStored = localStorage.getItem(i.toString());
+        var txtStored = localStorage.getItem(i.toString() + dayOfYear.toString());
 
         if (txtStored != null) {
           newTxt.text(txtStored);
@@ -92,7 +96,7 @@
 
         if (i < hourOfDay){
           newTxt.addClass("past");
-          newTxt.attr("disabled", "true");
+          newTxt.attr("disabled", "true");  //disabled text are for past scheduled
         }
         else if (i == hourOfDay){
           newTxt.addClass("present");
@@ -105,7 +109,7 @@
 
         var svBtn = $("<button>");
         svBtn.addClass("col-sm-1 saveBtn").attr("id", btnId);
-        svBtn.attr("date-number", i);
+        svBtn.attr("date-number", i.toString() + dayOfYear.toString());
         $("#"+rowId).append(svBtn);
       
         var iSv = $("<i>");
@@ -123,7 +127,8 @@
         localStorage.setItem(dateNumKey, dateStr);
       })
 
-      });
+    })
+
     </script>
 
   </body>
