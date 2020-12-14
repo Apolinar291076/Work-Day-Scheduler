@@ -6,11 +6,11 @@ When the planner is opened, the current date is displayed using the moment.js fo
 
 The timeblocks presented starts at 8AM and ends at 7PM. (line 51 in code).
 
-Depending on what time you opened the planner, the time blocks are color coded to indicate when they are in the past, present, or future.
+Depending on what time you opened the planner, the time blocks are color coded to indicate whether they are in the past, present, or future.
 
-A textarea element will allow the user to enter event on any time block chosen. When the save button for a given time block is clicked, the event for that particular time block is saved in the local storage. When the page is refreshed, those information will be copied back to the respective timeblocks. 
+A textarea element will allow the user to enter event on any time block chosen. When the save button for a given time block is clicked, the event for that particular time block is saved in the local storage. When the page is refreshed, those information will be copied back to the respective time blocks. 
 
-To make it unique I assigned a local storage key in the following format : "hourOfDay" + "dayOfYear. I did this so that events entered won't appear on the same timeblock the next day. Moving forward a more systematic approach in storing data could be implemented.
+To make it unique, I assigned a local storage key in the following format : "hourOfDay" + "dayOfYear. I did this so that events entered won't appear on the same timeblock on other days. Moving forward a more systematic approach in storing data could be implemented.
 
 ## Event Listener
 
